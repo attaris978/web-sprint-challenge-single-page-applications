@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import * as Yup from "yup";
 import formSchema from "../metaland/formSchema";
+import axios from 'axios';
 
 const Form = styled.form``;
 
@@ -10,10 +11,10 @@ const PizzaForm = (props) => {
   const [pizzaData, setPizzaData] = useState({
     name: "",
     size: "Brobdingnagian",
-    gumdrops: "true",
-    mackerel: "true",
-    peeps:"true",
-    squirrel:"true",
+    gumdrops: false,
+    mackerel: false,
+    peeps:false,
+    squirrel:false,
     special: "",
   });
   const [formError, setFormError] = useState({
@@ -43,12 +44,11 @@ const PizzaForm = (props) => {
       body: JSON.stringify(pizzaData),
       headers: { "Content-type": "application/json; charset=UTF-8" },
     })
-      // axios.post("https://reqres.in/api/users",formState)
-      // .then(response => console.log(response));
       .then((response) => response.json())
       .then(json => console.log(json))
       .catch((err) => console.error(err));
   
+      
   };
 
   return (
@@ -66,7 +66,7 @@ const PizzaForm = (props) => {
       {formError.name.length > 0 ? <p>{formError.name}</p> : null}
       <label htmlFor="size-dropdown">Pizza Size:</label>
       <select
-        name="pizzaSize"
+        name="size"
         id="size-dropdown"
         onChange={(e) => onChange(e)}
       >
@@ -119,9 +119,9 @@ const PizzaForm = (props) => {
         value={pizzaData.special}
         placeholder="If you simply have to have things your way..."
         onChange={(e) => onChange(e)}
-        maxLength="30"
+        maxLength="300"
       />
-      <button disabled={!buttonEnabled}>Submit!</button>
+      <button id="order-button" disabled={!buttonEnabled}>Submit!</button>
     </Form>
   );
 };
