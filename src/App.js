@@ -8,9 +8,9 @@ const App = () => {
     <>
       <h1>Lambda Eats</h1>
       <Link to="/">Home</Link>
-      <Link to="/pizzaForm" id="order-pizza">Order Online!</Link>
+      <Link to="/pizza" id="order-pizza">Order Online!</Link>
       <Route exact path="/" component={Home} />
-      <Route path="/pizzaForm" component={PizzaForm} />
+      <Route path="/pizza" component={PizzaForm} />
     </>
   );
 };
