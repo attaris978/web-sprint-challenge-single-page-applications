@@ -7,10 +7,15 @@ const formSchema = Yup.object().shape({
     .required("Please enter your name"),
   size: Yup.string("Please select a pizza size")
     .required("Please select a pizza size"),
-  mackerel: Yup.boolean(),
+  // mackerel: Yup.boolean(),
   peeps: Yup.boolean(),
-  squirrel: Yup.boolean(),
-  gumdrops: Yup.boolean(),
+  jellybeans:Yup.boolean(),
+  cadbury: Yup.boolean(),
+  dicedham: Yup.boolean(),
+  poptart: Yup.boolean(),
+  pepperoni: Yup.boolean(),
+  // squirrel: Yup.boolean(),
+  // gumdrops: Yup.boolean(),
   special: Yup.string()
   
 });
