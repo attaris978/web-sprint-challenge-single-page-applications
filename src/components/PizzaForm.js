@@ -8,6 +8,7 @@ const Form = styled.form`
 `;
 
 const PizzaForm = (props) => {
+    const [buttonEnabled, setButtonEnabled] = useState(false);
 const [pizzaData,setPizzaData] = useState(
     {
         name:"",
@@ -17,14 +18,53 @@ const [pizzaData,setPizzaData] = useState(
         special:""
     }
 );
+const [formError, setFormError] = useState({
+    name: "",
+    });
 
-// onchange(event) => {
+    useEffect(() => {
+        formSchema.isValid(pizzaData).then((valid) => setButtonEnabled(valid));
+      }, [pizzaData]);
 
-// }
+      const onChange = (event) => {
+        const { name, type, value, checked } = event.target;
+        const viableValue = type === "checkbox" ? checked : value;
+    
+        setPizzaData({ ...pizzaData, [name]: viableValue });
+    
+        Yup.reach(formSchema, [name])
+          .validate(viableValue)
+          .then((valid) => setFormError({ ...formError, [name]: "" }))
+          .catch(err => setFormError({...formError, [name]:err.errors[0]}))
+      };
+
+      const onSubmit = (event) => {
+        event.preventDefault();
+      };
 
 return (
-    <Form>
-        <h2>Hello</h2>
+    <Form onSubmit={(e) => onSubmit(e)}>
+         <label htmlFor="customerName">Name:</label>
+      <input
+        type="text"
+        name="name"
+        id="customerName"
+        value={pizzaData.name}
+        placeholder="Name of User"
+        onChange={(e) => onChange(e)}
+        maxLength="30"
+      />
+      {formError.name.length > 0 ? <p>{formError.name}</p> : null}
+      <label htmlFor="gumdrops">
+        Gumdrops
+      </label>
+      <input
+        type="checkbox"
+        name="gumdrops"
+        id="gumdrops"
+        checked={pizzaData.terms}
+        onChange={(e) => onChange(e)}
+      />
     </Form>
 )
 }
