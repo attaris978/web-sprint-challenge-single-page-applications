@@ -38,6 +38,17 @@ const PizzaForm = (props) => {
 
   const onSubmit = (event) => {
     event.preventDefault();
+    fetch("https://reqres.in/api/orders", {
+      method: "POST",
+      body: JSON.stringify(pizzaData),
+      headers: { "Content-type": "application/json; charset=UTF-8" },
+    })
+      // axios.post("https://reqres.in/api/users",formState)
+      // .then(response => console.log(response));
+      .then((response) => response.json())
+      .then(json => console.log(json))
+      .catch((err) => console.error(err));
+  
   };
 
   return (
@@ -110,6 +121,7 @@ const PizzaForm = (props) => {
         onChange={(e) => onChange(e)}
         maxLength="30"
       />
+      <button disabled={!buttonEnabled}>Submit!</button>
     </Form>
   );
 };
