@@ -44,17 +44,29 @@ const [formError, setFormError] = useState({
 
 return (
     <Form onSubmit={(e) => onSubmit(e)}>
-         <label htmlFor="customerName">Name:</label>
+         <label htmlFor="name-input">Name:</label>
       <input
         type="text"
         name="name"
-        id="customerName"
+        id="name-input"
         value={pizzaData.name}
         placeholder="Name of User"
         onChange={(e) => onChange(e)}
         maxLength="30"
       />
       {formError.name.length > 0 ? <p>{formError.name}</p> : null}
+      
+      <label htmlFor="pizzaSize">
+        Pizza Size:
+      </label>
+      <input
+        type="checkbox"
+        name="pizzaSize"
+        id="pizzaSize"
+        checked={pizzaData.size}
+        onChange={(e) => onChange(e)}
+      />
+      
       <label htmlFor="gumdrops">
         Gumdrops
       </label>
@@ -62,7 +74,7 @@ return (
         type="checkbox"
         name="gumdrops"
         id="gumdrops"
-        checked={pizzaData.terms}
+        checked={pizzaData.gumdrops}
         onChange={(e) => onChange(e)}
       />
     </Form>
